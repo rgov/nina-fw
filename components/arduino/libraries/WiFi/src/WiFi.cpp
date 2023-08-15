@@ -180,12 +180,12 @@ uint8_t WiFiClass::begin(const char* ssid, const char* key)
 
   esp_wifi_stop();
   esp_wifi_set_mode(WIFI_MODE_STA);
-  esp_wifi_start();
-  xEventGroupWaitBits(_eventGroup, BIT0, false, true, portMAX_DELAY);
-
   if (esp_wifi_set_config(WIFI_IF_STA, &wifiConfig) != ESP_OK) {
     _status = WL_CONNECT_FAILED;
   }
+  esp_wifi_start();
+  xEventGroupWaitBits(_eventGroup, BIT0, false, true, portMAX_DELAY);
+
 
   if (_ipInfo.ip.addr) {
     tcpip_adapter_dhcpc_stop(TCPIP_ADAPTER_IF_STA);
@@ -604,7 +604,7 @@ void WiFiClass::handleSystemEvent(system_event_t* event)
       char defaultHostname[13];
 
       esp_wifi_get_mac(WIFI_IF_STA, mac);
-      sprintf(defaultHostname, "arduino-%.2x%.2x", mac[4], mac[5]);
+      sprintf(defaultHostname, "nina-%.2x%.2x", mac[4], mac[5]);
       if (strlen(_hostname) == 0) {
         sprintf(_hostname, "%s", defaultHostname);
       }
