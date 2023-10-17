@@ -32,6 +32,10 @@
 #include <lwip/ip_addr.h>
 #include <lwip/inet_chksum.h>
 
+// Workaround for conflicting definitions of INADDR_NONE
+// https://github.com/espressif/arduino-esp32/issues/6760
+#undef INADDR_NONE
+
 #include "WiFi.h"
 
 WiFiClass::WiFiClass() :

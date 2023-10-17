@@ -23,6 +23,10 @@
 #include <lwip/netdb.h>
 #include <lwip/sockets.h>
 
+// Workaround for conflicting definitions of INADDR_NONE
+// https://github.com/espressif/arduino-esp32/issues/6760
+#undef INADDR_NONE
+
 #include "WiFiClient.h"
 
 
