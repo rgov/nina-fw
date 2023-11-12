@@ -112,4 +112,12 @@ void SPISClass::handleSetupComplete()
   xSemaphoreGiveFromISR(_readySemaphore, NULL);
 }
 
-SPISClass SPIS(VSPI_HOST, 1, 14, 23, 18, 5, 33);
+SPISClass SPIS(
+  SPI2_HOST,  // device
+  SPI_DMA_CH_AUTO,  // DMA channel
+  4,  // MOSI pin
+  5,  // MISO pin
+  6,  // SCLK pin
+  7,  // CS pin
+  8   // "ready" pin - not used
+);

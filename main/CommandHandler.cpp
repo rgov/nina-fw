@@ -233,22 +233,6 @@ int setDebug(const uint8_t command[], uint8_t response[])
   return 6;
 }
 
-extern "C" {
-  uint8_t temprature_sens_read();
-}
-
-int getTemperature(const uint8_t command[], uint8_t response[])
-{
-  float temperature = (temprature_sens_read() - 32) / 1.8;
-
-  response[2] = 1; // number of parameters
-  response[3] = sizeof(temperature); // parameter 1 length
-
-  memcpy(&response[4], &temperature, sizeof(temperature));
-
-  return 9;
-}
-
 int getConnStatus(const uint8_t command[], uint8_t response[])
 {
   uint8_t status = WiFi.status();
@@ -1130,7 +1114,7 @@ const CommandHandlerType commandHandlers[] = {
   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 
   // 0x10 -> 0x1f
-  setNet, setPassPhrase, setKey, NULL, setIPconfig, setDNSconfig, setHostname, setPowerMode, setApNet, setApPassPhrase, setDebug, getTemperature, NULL, NULL, NULL, NULL,
+  setNet, setPassPhrase, setKey, NULL, setIPconfig, setDNSconfig, setHostname, setPowerMode, setApNet, setApPassPhrase, setDebug, NULL, NULL, NULL, NULL, NULL,
 
   // 0x20 -> 0x2f
   getConnStatus, getIPaddr, getMACaddr, getCurrSSID, getCurrBSSID, getCurrRSSI, getCurrEnct, scanNetworks, startServerTcp, getStateTcp, dataSentTcp, availDataTcp, getDataTcp, startClientTcp, stopClientTcp, getClientStateTcp,
