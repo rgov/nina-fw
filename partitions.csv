@@ -1,6 +1,10 @@
-# Name,   Type, SubType, Offset,  Size
-# Note: if you change the phy_init or app partition offset, make sure to change the offset in Kconfig.projbuild
-nvs,      data, nvs,     0x9000,  0x6000
-phy_init, data, phy,     0xf000,  0x1000
-certs,    data, 0x04,    0x10000, 0x20000
-factory,  app,  factory, 0x30000, 0x180000
+# This is a based on default_16MB.csv from
+# https://registry.platformio.org/tools/platformio/framework-arduinoespressif32
+
+# Name,   Type, SubType, Offset,  Size, Flags
+nvs,      data, nvs,     0x9000,  0x5000,
+otadata,  data, ota,     0xe000,  0x2000,
+app0,     app,  ota_0,   0x10000, 0x640000,
+app1,     app,  ota_1,   0x650000,0x640000,
+certs,    data, spiffs,  0xc90000,0x360000,
+coredump, data, coredump,0xFF0000,0x10000,
